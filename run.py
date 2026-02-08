@@ -1,4 +1,4 @@
-from Evaluation import evaluation_script, model_inference
+from ThermEval_Benchmark import evaluation_script, model_inference
 import warnings
 warnings.filterwarnings("ignore")
 
