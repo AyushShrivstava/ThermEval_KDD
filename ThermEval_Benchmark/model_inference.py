@@ -484,7 +484,7 @@ def infer_blip2_opt_6_7B(model, processor, image, prompt):
 # ==========================================================================
 ### Loading Phi-3-vision-128k-instruct ###  
 
-### Use kir_env for this model
+### Use transformers==4.40.0
 def load_phi_3_vision_128k_instruct(model_name = "microsoft/Phi-3-vision-128k-instruct"):
 
     model = AutoModelForCausalLM.from_pretrained(model_name, device_map="cuda", trust_remote_code=True, torch_dtype=torch.bfloat16, _attn_implementation='eager')
@@ -620,7 +620,7 @@ def infer_minicpm_2_6(model, tokenizer, image, prompt):
 # ==========================================================================
 ###Loading microsoft/Phi-3.5-vision-instruct ### 
 
-### Use kir_env for this model
+### Use `transformers==4.40.0`
 def load_phi_3_5(model_name="microsoft/Phi-3.5-vision-instruct"):
     model = AutoModelForCausalLM.from_pretrained(
     model_name, 

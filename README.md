@@ -38,11 +38,11 @@ This repository contains the code and evaluation framework for **ThermEval**, a 
 |------|-----------|--------|---------|
 | **T1: Modality Identification (Baseline)** | Binary classification to distinguish thermal from RGB images | Accuracy | FLIR-ADAS, LLVIP |
 | **T2: Modality Identification with Colormap Transformations** | Test robustness with colormap transformations (Gray, Magma, Viridis, Spring, Summer) | Accuracy | FLIR-ADAS, LLVIP |
-| **T3: Human Counting** | Count pedestrians in road scenes | Mean Absolute Error (MAE) | FLIR-ADAS, LLVIP |
+| **T3: Human Counting** | Count pedestrians in road scenes | Mean Absolute Error | FLIR-ADAS, LLVIP |
 | **T4: Colorbar Interpretation** | Detect presence, localize position, extract temperature range from colorbar | Accuracy | ThermEval-D |
 | **T5: Thermal Reasoning** | Comparative reasoning between individuals & within-individual body-part ranking | Accuracy | ThermEval-D |
-| **T6: Temperature Estimation** | Coordinate-based, marker-based, and region-based temperature extraction | Mean Absolute Error (°C) | ThermEval-D |
-| **T7: Multi-Distance Temperature Estimation** | Estimate temperatures across different capture distances (2ft, 6ft, 10ft) | Mean Absolute Error (°C) | ThermEval-D |
+| **T6: Temperature Estimation** | Coordinate-based, marker-based, and region-based temperature extraction | Mean Absolute Error (in °C) | ThermEval-D |
+| **T7: Multi-Distance Temperature Estimation** | Estimate temperatures across different capture distances (2ft, 6ft, 10ft) | Mean Absolute Error (in °C) | ThermEval-D |
 
 
 
@@ -80,9 +80,9 @@ ThermEval_KDD/
 pip install torch torchvision transformers opencv-python tifffile matplotlib tqdm pandas pillow qwen-vl-utils
 ```
 
-For specific models, ensure you have the appropriate dependencies:
-- Flash Attention 2 for InternVL models
-- Transformers with vision models support
+### Tranformers
+- **Phi models** → `transformers==4.40.0`
+- **All other models** → `transformers==4.57.1`
 
 ### Dataset Setup
 
