@@ -252,13 +252,13 @@ The `model_inference.py` module supports the following models:
 
 6. **Fixed Response Patterns**: Models converge to narrow set of predicted values
 
-## License
+<!-- ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details. -->
 
-## Contact
+<!-- ## Contact
 
-For questions, issues, or collaboration, please contact the authors.
+For questions, issues, or collaboration, please contact the authors. -->
 
 ## Acknowledgments
 
