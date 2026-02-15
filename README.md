@@ -8,6 +8,7 @@
         <img src="https://img.shields.io/badge/Dataset-Download-green?style=for-the-badge&logo=kaggle&logoColor=white" alt="Download Dataset">
     </a>
     <img src="https://img.shields.io/badge/Status-Under%20Review-yellow?style=for-the-badge&link=" alt="Status" style="margin: 0 10px;">
+    <img src="https://img.shields.io/badge/Paper-Coming%20Soon-purple?style=for-the-badge&link=" alt="Paper" style="margin: 0 10px;">
 </p>
 
 ## Overview
