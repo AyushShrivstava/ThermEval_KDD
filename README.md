@@ -1,49 +1,268 @@
-# ThermEval_KDD
-
-Repository for the ThermEval submission to KDD. This repository contains dataset references, label files, and the evaluation/benchmarking code used for our KDD submission.
-
+# ThermEval: A Structured Benchmark for Evaluation of Vision-Language Models on Thermal Imagery
 
 <p align="center">
-	<img src="images/ThermEval_Complete.jpg" alt="ThermEval Hero" />
+    <a href="https://sustainability-lab.github.io/thermeval/" target="_blank" rel="noopener">
+        <img src="https://img.shields.io/badge/Project%20Page-Visit-blue?style=for-the-badge&logo=read-the-docs&logoColor=white" alt="Project Page">
+    </a>
+    &nbsp;
+    <a href="https://www.kaggle.com/datasets/shriayush/thermeval" target="_blank" rel="noopener">
+        <img src="https://img.shields.io/badge/Dataset-Download-green?style=for-the-badge&logo=kaggle&logoColor=white" alt="Download Dataset">
+    </a>
+    &nbsp;
+    <img src="https://img.shields.io/badge/Status-Under%20Review-yellow?style=for-the-badge" alt="Status">
 </p>
-
-<!-- <p align="center">
-	<img src="images/ThermEval_Tasks.jpg" alt="ThermEval Hero" />
-</p> -->
-
 
 ## Overview
 
-- **Purpose:** Provide resources and scripts used for the ThermEval submission to KDD (datasets, labels, and benchmark evaluation code).
-- **Contents:** dataset pointers, label CSVs for multiple tasks, and evaluation/inference scripts for reproducing benchmark results.
+<p align="center">
+    <img src="images/ThermEval_Hero.png" alt="ThermEval Hero" width="800"/>
+</p>
+
+This repository contains the code and evaluation framework for **ThermEval**, a structured benchmark for evaluating Vision-Language Models (VLMs) on thermal imagery understanding tasks. This is the official implementation for our KDD 2025 submission (under review).
+
+### Key Highlights
+
+- **Seven comprehensive evaluation tasks** spanning modality identification, counting, reasoning, and temperature estimation
+- **~55,000 thermal VQA pairs** across all tasks
+- **Evaluation of 15+ state-of-the-art VLMs** ranging from 0.3B to 235B parameters
+- **Benchmark datasets**: FLIR-ADAS, LLVIP, and ThermEval-D (our custom thermal dataset)
+- **Documented systematic failure modes** of VLMs on thermal imagery
+
+## Benchmark Tasks
+
+<p align="center">
+    <img src="images/ThermEval_Tasks.jpg" alt="ThermEval Tasks" width="800"/>
+</p>
+
+### Task 1: Modality Identification (Baseline)
+- **Objective**: Binary classification to distinguish thermal from RGB images
+- **Metric**: Accuracy
+- **Datasets**: FLIR-ADAS, LLVIP
+- **Prompt**: "Is this a thermal image or an RGB image?"
+
+### Task 2: Modality Identification with Colormap Transformations
+- **Objective**: Same as Task 1 but with colormap transformations to test robustness
+- **Colormaps**: Gray, Magma, Viridis, Spring, Summer
+- **Metric**: Accuracy
+- **Purpose**: Evaluate whether models rely on color statistics or modality-invariant features
+
+### Task 3: Human Counting
+- **Objective**: Count pedestrians in road scenes
+- **Metric**: Mean Absolute Error (MAE)
+- **Datasets**: FLIR-ADAS, LLVIP
+- **Challenge**: Varying crowd densities
+
+### Task 4: Colorbar Interpretation
+- **Subtask 1**: Detect presence of colorbar (binary classification)
+- **Subtask 2**: Localize colorbar position (Top, Left, Bottom, Right)
+- **Subtask 3**: Extract temperature range (minimum and maximum values)
+- **Dataset**: ThermEval-D
+- **Purpose**: Essential prerequisite for temperature estimation tasks
+
+### Task 5: Thermal Reasoning
+- **Subtask 1**: Comparative reasoning - compare body-part temperatures between two individuals
+- **Subtask 2**: Within-individual ranking - rank body parts by thermal intensity
+- **Metric**: Accuracy
+- **Dataset**: ThermEval-D
+- **Purpose**: Tests relational understanding rather than absolute estimation
+
+### Task 6: Temperature Estimation
+- **Subtask 1**: Coordinate-based extraction at specific pixel coordinates
+- **Subtask 2**: Marker-based estimation at visually marked locations
+- **Subtask 3**: Region-based inference for semantic regions (forehead, chest, nose)
+- **Metric**: Mean Absolute Error (MAE) in °C
+- **Dataset**: ThermEval-D
+
+### Task 7: Multi-Distance Temperature Estimation
+- **Objective**: Estimate temperatures across different capture distances (2ft, 6ft, 10ft)
+- **Metric**: Mean Absolute Error (MAE) in °C
+- **Dataset**: ThermEval-D
+- **Purpose**: Evaluate robustness to imaging distance variations
 
 ## Repository Structure
-- [Dataset](Dataset): Source datasets used in experiments (subfolders for `FLIR`, `LLVIP`, and `ThermEval-D`).
-- [Labels](Labels): Task-specific label CSVs. See descriptions below.
-- [ThermEval_Benchmark](ThermEval_Benchmark): Evaluation and inference utilities.
-	- `evaluation_script.py` — evaluation/metrics used in the benchmark
-	- `model_inference.py` — inference helper for running models on the datasets
-- `run.py` — (optional) top-level runner (if applicable for experiments)
 
-**Labels and Tasks**
-The `Labels` folder contains CSVs organized by task:
-- `T1/`, `T2/`, `T3/` — task-specific CSV label files for `FLIR` and `LLVIP` datasets.
-- `T5/`, `T6/` — single/double annotation CSVs and coordinate files used for localization/pose tasks.
-- `T7/` — `annotations.csv` for the corresponding task.
-- `T8/` — `T8.csv` (task-specific labels).
+```
+ThermEval_KDD/
+├── Dataset/                    # Source datasets
+│   ├── FLIR/                   # FLIR-ADAS thermal images
+│   ├── LLVIP/                  # LLVIP thermal images
+│   └── ThermEval-D/            # Custom thermal dataset with .tiff files
+│       └── Temp_Matrix/        # Temperature matrix files
+├── Labels/                     # Task-specific ground truth labels
+│   ├── T1/                     # Task 1 labels (thermal vs RGB)
+│   ├── T2/                     # Task 2 labels (colormap variants)
+│   ├── T3/                     # Task 3 labels (human counting)
+│   ├── T5/                     # Task 5 labels (thermal reasoning)
+│   ├── T6/                     # Task 6 labels (temperature estimation)
+│   ├── T7/                     # Task 7 labels (multi-distance)
+│   └── T8/                     # Task 8 labels (bounding box detection)
+├── ThermEval_Benchmark/         # Evaluation framework
+│   ├── evaluation_script.py      # Task evaluation functions
+│   └── model_inference.py       # Model loading and inference utilities
+├── images/                     # Documentation images
+├── run.py                      # Main runner script
+├── README.md                   # This file
+└── ThermEval_A_Structured_Benc.pdf  # Full paper
+```
 
-Refer to each CSV to understand column formats and annotation conventions used in the experiments.
+## Installation
 
-## Benchmark & Evaluation
-To reproduce evaluation results, use the scripts in [ThermEval_Benchmark](ThermEval_Benchmark):
+### Requirements
 
-Adjust script arguments as needed for dataset paths and model checkpoints. See the individual scripts for supported flags and formats.
+```bash
+pip install torch torchvision transformers opencv-python tifffile matplotlib tqdm pandas pillow qwen-vl-utils
+```
 
-## Reproducing Experiments
-1. Prepare dataset folders under `Dataset/` as expected by the inference script.
-2. Place model checkpoints or inference code accessible to `model_inference.py`.
-3. Run inference to generate predictions, then run `evaluation_script.py` to compute metrics.
+For specific models, ensure you have the appropriate dependencies:
+- Flash Attention 2 for InternVL models
+- Transformers with vision models support
 
-## Contact & Citation
-This repository accompanies our KDD submission (ThermEval). For questions or collaboration, contact the authors from the submission. If you use this code or labels, please cite the ThermEval KDD paper.
+### Dataset Setup
 
+1. **Download the datasets**:
+   - FLIR-ADAS: [Link](https://www.flir.com/oem/adas/thermal-dataset-form/)
+   - LLVIP: [Link](https://github.com/bingcKILV/LLVIP)
+   - ThermEval-D: [Kaggle](https://www.kaggle.com/datasets/shriayush/thermeval)
+
+2. **Organize datasets** as follows:
+   ```
+   Dataset/
+   ├── FLIR/         # FLIR images
+   ├── LLVIP/        # LLVIP images
+   └── ThermEval-D/  # ThermEval-D .tiff files
+       └── Temp_Matrix/
+   ```
+
+## Usage
+
+### Running a Single Task
+
+To evaluate a specific model on a specific task:
+
+```python
+from ThermEval_Benchmark import evaluation_script, model_inference
+
+# Load model (example: Qwen-VL 2.5 32B)
+model, processor = model_inference.load_qwen_vl_2_5_32B()
+
+# Run evaluation for Task 1
+evaluation_script.evaluate_T1_T3(
+    task_number=1,
+    model_name='qwen_vl_2_5_32B',
+    model=model,
+    processor=processor,
+    batch_size=4
+)
+```
+
+### Running All Tasks
+
+The provided `run.py` script evaluates all tasks for specified models:
+
+```bash
+python run.py
+```
+
+Edit `run.py` to:
+- Add/remove models to evaluate
+- Adjust batch sizes
+- Change task selection
+
+### Supported Models
+
+The `model_inference.py` module supports the following models:
+
+| Model | Function Name | Size |
+|-------|--------------|------|
+| Qwen-VL 2 | `load_qwen_vl_2_7B` | 7B |
+| Qwen-VL 2.5 | `load_qwen_vl_2_5_7B` | 7B |
+| Qwen-VL 2.5 | `load_qwen_vl_2_5_32B` | 32B |
+| PaliGemma 2 | `load_paligemma_2_3B` | 3B |
+| InternVL 3 | `load_internvl3_8B` | 8B |
+| InternVL 3 | `load_internvl3_14B` | 14B |
+| InternVL 3 | `load_internvl3_38B` | 38B |
+| BLIP-2 | `load_blip2_opt_6_7B` | 6.7B |
+| Phi-3 Vision | `load_phi_3_vision_128k_instruct` | 4.2B |
+| Idefics3 | `load_idefics3_8B` | 8B |
+| LLaVA 1.5 | `load_llava_1_5_7b` | 7B |
+| Llama 3.2 Vision | `load_llama_3_2_11_b` | 11B |
+| MiniCPM-V | `load_minicpm_2_6` | 8B |
+| SmolVLM | `load_smol_256m` | 256M |
+| Jina VLM | `load_jinaai` | 2.7B |
+
+## Evaluation Results
+
+### Summary of Key Findings
+
+<p align="center">
+    <img src="images/Results1.png" alt="ThermEval Results 1" width="700"/>
+</p>
+
+<p align="center">
+    <img src="images/Results2.png" alt="ThermEval Results 2" width="700"/>
+</p>
+
+#### Modality Recognition (T1-T2)
+- Most VLMs achieve high accuracy (>95%) on basic thermal vs RGB identification
+- Performance degrades under colormap transformations, especially with complex colormaps
+- Models like BLIP-2 and LLaVA-1.5 show significant drops, suggesting reliance on color statistics
+
+#### Human Counting (T3)
+- Wide performance variability: MAE ranges from 0.48 to 4.69
+- Systematic failures observed: InternVL-3 8B defaults to "11" when uncertain
+- Scaling helps: InternVL performance improves from 8B → 14B → 38B
+
+#### Colorbar Interpretation (T4)
+- Near-perfect detection for modern VLMs (Qwen, InternVL, Jina)
+- Critical OCR failures in LLaVA-1.5, InternVL-3 8B, MiniCPM:
+  - Hallucinated values (LLaVA)
+  - Decimal-shift errors (InternVL-3 8B: 33.5 → 335)
+  - Constant offset errors (MiniCPM: +200°C bias)
+
+#### Thermal Reasoning (T5)
+- **Comparative reasoning**: Best open-source: 0.61 (LLaMA-3.2), Human: 0.84
+- **Within-individual reasoning**: Best: 0.53 (InternVL-3 8B), Human: 0.54
+- Scaling does not guarantee improvement
+
+#### Temperature Estimation (T6-T7)
+- Large models achieve MAE >3.5°C on coordinate/marker tasks
+- Human baseline: 2.73°C
+- **Language prior dominance**: Models output 37°C (canonical body temp) regardless of thermal signal
+
+#### Supervised Fine-Tuning (SFT)
+- Qwen-VL 2.5 8B with SFT outperforms all zero-shot models including 235B Qwen
+- Matches or exceeds human performance on most tasks
+- Demonstrates VLMs have latent capacity but lack thermal-domain grounding
+
+### Documented Failure Modes
+
+<p align="center">
+    <img src="images/ThermEval_Failures.jpg" alt="ThermEval Failures" width="700"/>
+</p>
+
+1. **Language Prior Dominance**: Models default to canonical body temperature (36.8-37°C) regardless of actual thermal values
+
+2. **Systematic Counting Bias**: InternVL-3 8B defaults to "11 humans" when uncertain
+
+3. **Spatial Grounding Failures**: Incorrect left-right discrimination in comparative reasoning
+
+4. **Colormap Confusion**: Performance collapse under colormap transformations
+
+5. **OCR and Numerical Extraction Errors**: Decimal point errors, order of magnitude hallucinations
+
+6. **Fixed Response Patterns**: Models converge to narrow set of predicted values
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+For questions, issues, or collaboration, please contact the authors.
+
+## Acknowledgments
+
+- FLIR for the FLIR-ADAS dataset
+- LLVIP team for the LLVIP dataset
+- The Hugging Face team for the Transformers library
+- All model developers whose work was evaluated in this benchmark
