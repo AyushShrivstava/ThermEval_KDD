@@ -134,27 +134,6 @@ Edit `run.py` to:
 - Adjust batch sizes
 - Change task selection
 
-### Supported Models
-
-The `model_inference.py` module supports the following models:
-
-| Model | Function Name | Size |
-|-------|--------------|------|
-| Qwen-VL 2 | `load_qwen_vl_2_7B` | 7B |
-| Qwen-VL 2.5 | `load_qwen_vl_2_5_7B` | 7B |
-| Qwen-VL 2.5 | `load_qwen_vl_2_5_32B` | 32B |
-| PaliGemma 2 | `load_paligemma_2_3B` | 3B |
-| InternVL 3 | `load_internvl3_8B` | 8B |
-| InternVL 3 | `load_internvl3_14B` | 14B |
-| InternVL 3 | `load_internvl3_38B` | 38B |
-| BLIP-2 | `load_blip2_opt_6_7B` | 6.7B |
-| Phi-3 Vision | `load_phi_3_vision_128k_instruct` | 4.2B |
-| Idefics3 | `load_idefics3_8B` | 8B |
-| LLaVA 1.5 | `load_llava_1_5_7b` | 7B |
-| Llama 3.2 Vision | `load_llama_3_2_11_b` | 11B |
-| MiniCPM-V | `load_minicpm_2_6` | 8B |
-| SmolVLM | `load_smol_256m` | 256M |
-| Jina VLM | `load_jinaai` | 2.7B |
 
 ## Evaluation Results
 
