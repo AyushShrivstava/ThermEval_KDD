@@ -13,7 +13,7 @@
 ## Overview
 
 <p align="center">
-    <img src="images/ThermEval_Hero.png" alt="ThermEval Hero" width="800"/>
+    <img src="images/ThermEval_Hero.png" alt="ThermEval Hero"/>
 </p>
 
 This repository contains the code and evaluation framework for **ThermEval**, a structured benchmark for evaluating Vision-Language Models (VLMs) on thermal imagery understanding tasks. This is the official implementation for our KDD 2025 submission (under review).
@@ -22,60 +22,29 @@ This repository contains the code and evaluation framework for **ThermEval**, a 
 
 - **Seven comprehensive evaluation tasks** spanning modality identification, counting, reasoning, and temperature estimation
 - **~55,000 thermal VQA pairs** across all tasks
-- **Evaluation of 15+ state-of-the-art VLMs** ranging from 0.3B to 235B parameters
+- **Evaluation of 25 state-of-the-art VLMs** ranging from 0.3B to 235B parameters
 - **Benchmark datasets**: FLIR-ADAS, LLVIP, and ThermEval-D (our custom thermal dataset)
 - **Documented systematic failure modes** of VLMs on thermal imagery
 
 ## Benchmark Tasks
 
+
 <p align="center">
-    <img src="images/ThermEval_Tasks.jpg" alt="ThermEval Tasks" width="800"/>
+    <img src="images/ThermEval_Tasks.jpg" alt="ThermEval Tasks"/>
 </p>
 
-### Task 1: Modality Identification (Baseline)
-- **Objective**: Binary classification to distinguish thermal from RGB images
-- **Metric**: Accuracy
-- **Datasets**: FLIR-ADAS, LLVIP
-- **Prompt**: "Is this a thermal image or an RGB image?"
+| Task | Objective | Metric | Dataset |
+|------|-----------|--------|---------|
+| **T1: Modality Identification (Baseline)** | Binary classification to distinguish thermal from RGB images | Accuracy | FLIR-ADAS, LLVIP |
+| **T2: Modality Identification with Colormap Transformations** | Test robustness with colormap transformations (Gray, Magma, Viridis, Spring, Summer) | Accuracy | FLIR-ADAS, LLVIP |
+| **T3: Human Counting** | Count pedestrians in road scenes | Mean Absolute Error (MAE) | FLIR-ADAS, LLVIP |
+| **T4: Colorbar Interpretation** | Detect presence, localize position, extract temperature range from colorbar | Accuracy | ThermEval-D |
+| **T5: Thermal Reasoning** | Comparative reasoning between individuals & within-individual body-part ranking | Accuracy | ThermEval-D |
+| **T6: Temperature Estimation** | Coordinate-based, marker-based, and region-based temperature extraction | Mean Absolute Error (°C) | ThermEval-D |
+| **T7: Multi-Distance Temperature Estimation** | Estimate temperatures across different capture distances (2ft, 6ft, 10ft) | Mean Absolute Error (°C) | ThermEval-D |
 
-### Task 2: Modality Identification with Colormap Transformations
-- **Objective**: Same as Task 1 but with colormap transformations to test robustness
-- **Colormaps**: Gray, Magma, Viridis, Spring, Summer
-- **Metric**: Accuracy
-- **Purpose**: Evaluate whether models rely on color statistics or modality-invariant features
 
-### Task 3: Human Counting
-- **Objective**: Count pedestrians in road scenes
-- **Metric**: Mean Absolute Error (MAE)
-- **Datasets**: FLIR-ADAS, LLVIP
-- **Challenge**: Varying crowd densities
 
-### Task 4: Colorbar Interpretation
-- **Subtask 1**: Detect presence of colorbar (binary classification)
-- **Subtask 2**: Localize colorbar position (Top, Left, Bottom, Right)
-- **Subtask 3**: Extract temperature range (minimum and maximum values)
-- **Dataset**: ThermEval-D
-- **Purpose**: Essential prerequisite for temperature estimation tasks
-
-### Task 5: Thermal Reasoning
-- **Subtask 1**: Comparative reasoning - compare body-part temperatures between two individuals
-- **Subtask 2**: Within-individual ranking - rank body parts by thermal intensity
-- **Metric**: Accuracy
-- **Dataset**: ThermEval-D
-- **Purpose**: Tests relational understanding rather than absolute estimation
-
-### Task 6: Temperature Estimation
-- **Subtask 1**: Coordinate-based extraction at specific pixel coordinates
-- **Subtask 2**: Marker-based estimation at visually marked locations
-- **Subtask 3**: Region-based inference for semantic regions (forehead, chest, nose)
-- **Metric**: Mean Absolute Error (MAE) in °C
-- **Dataset**: ThermEval-D
-
-### Task 7: Multi-Distance Temperature Estimation
-- **Objective**: Estimate temperatures across different capture distances (2ft, 6ft, 10ft)
-- **Metric**: Mean Absolute Error (MAE) in °C
-- **Dataset**: ThermEval-D
-- **Purpose**: Evaluate robustness to imaging distance variations
 
 ## Repository Structure
 
@@ -92,8 +61,7 @@ ThermEval_KDD/
 │   ├── T3/                     # Task 3 labels (human counting)
 │   ├── T5/                     # Task 5 labels (thermal reasoning)
 │   ├── T6/                     # Task 6 labels (temperature estimation)
-│   ├── T7/                     # Task 7 labels (multi-distance)
-│   └── T8/                     # Task 8 labels (bounding box detection)
+│   └── T7/                     # Task 7 labels (multi-distance)
 ├── ThermEval_Benchmark/         # Evaluation framework
 │   ├── evaluation_script.py      # Task evaluation functions
 │   └── model_inference.py       # Model loading and inference utilities
@@ -192,14 +160,6 @@ The `model_inference.py` module supports the following models:
 
 ### Summary of Key Findings
 
-<p align="center">
-    <img src="images/Results1.png" alt="ThermEval Results 1" width="700"/>
-</p>
-
-<p align="center">
-    <img src="images/Results2.png" alt="ThermEval Results 2" width="700"/>
-</p>
-
 #### Modality Recognition (T1-T2)
 - Most VLMs achieve high accuracy (>95%) on basic thermal vs RGB identification
 - Performance degrades under colormap transformations, especially with complex colormaps
@@ -217,6 +177,11 @@ The `model_inference.py` module supports the following models:
   - Decimal-shift errors (InternVL-3 8B: 33.5 → 335)
   - Constant offset errors (MiniCPM: +200°C bias)
 
+<p align="center">
+    <img src="images/Results1.png" alt="ThermEval Results 1"/>
+</p>
+
+
 #### Thermal Reasoning (T5)
 - **Comparative reasoning**: Best open-source: 0.61 (LLaMA-3.2), Human: 0.84
 - **Within-individual reasoning**: Best: 0.53 (InternVL-3 8B), Human: 0.54
@@ -232,10 +197,15 @@ The `model_inference.py` module supports the following models:
 - Matches or exceeds human performance on most tasks
 - Demonstrates VLMs have latent capacity but lack thermal-domain grounding
 
+
+<p align="center">
+    <img src="images/Results2.png" alt="ThermEval Results 2">
+</p>
+
 ### Documented Failure Modes
 
 <p align="center">
-    <img src="images/ThermEval_Failures.jpg" alt="ThermEval Failures" width="700"/>
+    <img src="images/ThermEval_Failures.jpg" alt="ThermEval Failures">
 </p>
 
 1. **Language Prior Dominance**: Models default to canonical body temperature (36.8-37°C) regardless of actual thermal values
