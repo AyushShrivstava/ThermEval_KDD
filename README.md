@@ -1,13 +1,13 @@
 # ThermEval: A Structured Benchmark for Evaluation of Vision-Language Models on Thermal Imagery
 
 <p align="center">
-    <a href="https://sustainability-lab.github.io/thermeval/" target="_blank" rel="noopener" style="margin: 0 5px;">
+    <a href="https://sustainability-lab.github.io/thermeval/" target="_blank" rel="noopener" style="margin: 0 10px;">
         <img src="https://img.shields.io/badge/Project%20Page-Visit-blue?style=for-the-badge&logo=read-the-docs&logoColor=white" alt="Project Page">
     </a>
-    <a href="https://www.kaggle.com/datasets/shriayush/thermeval" target="_blank" rel="noopener" style="margin: 0 5px;">
+    <a href="https://www.kaggle.com/datasets/shriayush/thermeval" target="_blank" rel="noopener" style="margin: 0 10px;">
         <img src="https://img.shields.io/badge/Dataset-Download-green?style=for-the-badge&logo=kaggle&logoColor=white" alt="Download Dataset">
     </a>
-    <img src="https://img.shields.io/badge/Status-Under%20Review-yellow?style=for-the-badge&link=" alt="Status" style="margin: 0 5px;">
+    <img src="https://img.shields.io/badge/Status-Under%20Review-yellow?style=for-the-badge&link=" alt="Status" style="margin: 0 10px;">
 </p>
 
 ## Overview
