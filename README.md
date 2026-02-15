@@ -4,15 +4,20 @@ Repository for the ThermEval submission to KDD. This repository contains dataset
 
 
 <p align="center">
-	<img src="images/ThermEval_Hero.png" alt="ThermEval Hero" />
+	<img src="images/ThermEval_Complete.jpg" alt="ThermEval Hero" />
 </p>
 
+<!-- <p align="center">
+	<img src="images/ThermEval_Tasks.jpg" alt="ThermEval Hero" />
+</p> -->
 
-**Overview**
+
+## Overview
+
 - **Purpose:** Provide resources and scripts used for the ThermEval submission to KDD (datasets, labels, and benchmark evaluation code).
 - **Contents:** dataset pointers, label CSVs for multiple tasks, and evaluation/inference scripts for reproducing benchmark results.
 
-**Repository Structure**
+## Repository Structure
 - [Dataset](Dataset): Source datasets used in experiments (subfolders for `FLIR`, `LLVIP`, and `ThermEval-D`).
 - [Labels](Labels): Task-specific label CSVs. See descriptions below.
 - [ThermEval_Benchmark](ThermEval_Benchmark): Evaluation and inference utilities.
@@ -29,26 +34,16 @@ The `Labels` folder contains CSVs organized by task:
 
 Refer to each CSV to understand column formats and annotation conventions used in the experiments.
 
-**Benchmark & Evaluation**
+## Benchmark & Evaluation
 To reproduce evaluation results, use the scripts in [ThermEval_Benchmark](ThermEval_Benchmark):
-
-Run inference (example):
-```
-python ThermEval_Benchmark/model_inference.py --dataset <path> --model <model_path> --out <predictions.csv>
-```
-
-Evaluate predictions (example):
-```
-python ThermEval_Benchmark/evaluation_script.py --predictions <predictions.csv> --labels <labels.csv>
-```
 
 Adjust script arguments as needed for dataset paths and model checkpoints. See the individual scripts for supported flags and formats.
 
-**Reproducing Experiments**
+## Reproducing Experiments
 1. Prepare dataset folders under `Dataset/` as expected by the inference script.
 2. Place model checkpoints or inference code accessible to `model_inference.py`.
 3. Run inference to generate predictions, then run `evaluation_script.py` to compute metrics.
 
-**Contact & Citation**
+## Contact & Citation
 This repository accompanies our KDD submission (ThermEval). For questions or collaboration, contact the authors from the submission. If you use this code or labels, please cite the ThermEval KDD paper.
 
