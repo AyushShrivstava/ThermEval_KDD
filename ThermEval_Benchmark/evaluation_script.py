@@ -447,7 +447,7 @@ def evaluate_T4(model_name, model, processor, batch_size=8):
     print(f"{model_name} supports batch: {supports_batch}")
 
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    tiff_dir = os.path.join(BASE_DIR, "Dataset/ThermEval-D/Temp_Matrix")
+    tiff_dir = os.path.join(BASE_DIR, "Dataset/ThermEval-D")
     output_dir = os.path.join(BASE_DIR, "Evaluation_Result", "T4")
     os.makedirs(output_dir, exist_ok=True)
 
@@ -510,6 +510,7 @@ def evaluate_T4(model_name, model, processor, batch_size=8):
             (
                 img_with_cbar,
                 "You are given a thermal image. Does it contain a color bar or temperature scale that maps colors to temperature values? Answer only with 'Yes' or 'No'. Strictly answer in one word.",
+                "yes"
             ),
             (
                 img_without_cbar,
@@ -633,7 +634,7 @@ def evaluate_T5(model_name, model, processor, batch_size=8):
     output_dir = os.path.join(BASE_DIR, "Evaluation_Result", "T5")
     os.makedirs(output_dir, exist_ok=True)
 
-    tiff_dir = os.path.join(BASE_DIR, "Dataset")
+    tiff_dir = os.path.join(BASE_DIR, "Dataset/ThermEval-D")
 
     def flush_batch(batch_images, batch_rows, out_df, output_csv):
         if not batch_images:
@@ -731,12 +732,11 @@ def evaluate_T5(model_name, model, processor, batch_size=8):
         tiff_file = row["tiff_file"]
         tiff_path = os.path.join(tiff_dir, f"{tiff_file}.tiff")
 
+        prompt = row['prompt']
         category = row["category"]
         key = (tiff_file, category)
         if key in done:
             continue
-
-        prompt = f"Given the thermal image with colourbar, determine whether the {category} of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word."
 
         gt = row["ground_truth"]
 
@@ -774,7 +774,7 @@ def evaluate_T6(model_name, model, processor, batch_size=8):
     output_dir = os.path.join(BASE_DIR, "Evaluation_Result", "T6")
     os.makedirs(output_dir, exist_ok=True)
 
-    tiff_dir = os.path.join(BASE_DIR, "Dataset")
+    tiff_dir = os.path.join(BASE_DIR, "Dataset/ThermEval-D")
 
     def flush_batch(batch_images, batch_rows, out_df, output_csv):
         if not batch_images:
@@ -915,9 +915,9 @@ def evaluate_T6(model_name, model, processor, batch_size=8):
 
     out_df2 = flush_batch_arrow(batch_images, batch_rows, out_df2, output_csv2, done)
 
-    # ==================================================================
-    # Subtask 3: Region Temperature Estimation (single.csv + double.csv)
-    # ==================================================================
+    # ========================================
+    # Subtask 3: Region Temperature Estimation
+    # ========================================
     output_csv3 = os.path.join(output_dir, f"Region-{model_name}.csv")
     if os.path.exists(output_csv3):
         out_df3 = pd.read_csv(output_csv3)
@@ -928,42 +928,14 @@ def evaluate_T6(model_name, model, processor, batch_size=8):
 
     batch_images, batch_rows = [], []
 
-    # double.csv
-    double_csv = os.path.join(input_dir, "double.csv")
-    if os.path.exists(double_csv):
-        df_double = pd.read_csv(double_csv)
-        for _, row in tqdm(df_double.iterrows(), total=len(df_double), desc="T6-Region-Double"):
+    # region.csv
+    region_csv = os.path.join(input_dir, "region.csv")
+    if os.path.exists(region_csv):
+        df_region = pd.read_csv(region_csv)
+        for _, row in tqdm(df_region.iterrows(), total=len(df_region), desc="T6-Region"):
             tiff_file = row["tiff_file"]
             tiff_path = os.path.join(tiff_dir, f"{tiff_file}.tiff")
-            prompt = f"Given the thermal image, what is the temperature estimate of the {row['category']} of the {row['side']} person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place."
-
-            gt = row["ground_truth"]
-
-            key = (tiff_file, prompt)
-            if key in done:
-                continue
-
-            img = thermal_with_cbar(tiff_path, direction="right")
-            batch_images.append(img)
-            batch_rows.append({
-                "tiff_file": tiff_file,
-                "prompt": prompt,
-                "ground_truth": gt
-            })
-            done.add(key)
-
-            if len(batch_images) >= batch_size:
-                out_df3 = flush_batch(batch_images, batch_rows, out_df3, output_csv3)
-
-    # single.csv
-    single_csv = os.path.join(input_dir, "single.csv")
-    if os.path.exists(single_csv):
-        df_single = pd.read_csv(single_csv)
-        for _, row in tqdm(df_single.iterrows(), total=len(df_single), desc="T6-Region-Single"):
-            tiff_file = row["tiff_file"]
-            tiff_path = os.path.join(tiff_dir, f"{tiff_file}.tiff")
-            prompt = f"Given the thermal image, what is the temperature estimate of the {row['category']} according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place."
-
+            prompt = row['prompt']
             gt = row["ground_truth"]
 
             key = (tiff_file, prompt)
@@ -998,7 +970,7 @@ def evaluate_T7(model_name, model, processor, batch_size=8):
     output_dir = os.path.join(BASE_DIR, "Evaluation_Result", "T7")
     os.makedirs(output_dir, exist_ok=True)
 
-    tiff_dir = os.path.join(BASE_DIR, "Dataset")
+    tiff_dir = os.path.join(BASE_DIR, "Dataset/ThermEval-D")
 
     def flush_batch(batch_images, batch_rows, out_df, output_csv):
         if not batch_images:
@@ -1078,114 +1050,6 @@ def evaluate_T7(model_name, model, processor, batch_size=8):
                 "tiff_file": tiff_file,
                 "category": category,
                 "distance": distance,
-                "prompt": prompt,
-                "ground_truth": gt
-            })
-
-            done.add(key)
-
-            if len(batch_images) >= batch_size:
-                out_df = flush_batch(
-                    batch_images, batch_rows, out_df, output_csv
-                )
-
-        out_df = flush_batch(
-            batch_images, batch_rows, out_df, output_csv
-        )
-
-# ==========================================================================
-### Task 8 ###
-# ==========================================================================
-def evaluate_T8(model_name, model, processor, batch_size=8):
-    infer_model = getattr(model_inference, f"infer_{model_name}")
-
-    supports_batch = "images" in inspect.signature(infer_model).parameters
-    print(f"{model_name} supports batch: {supports_batch}")
-
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    input_dir = os.path.join(BASE_DIR, "Labels", "T8")
-    output_dir = os.path.join(BASE_DIR, "Evaluation_Result", "T8")
-    os.makedirs(output_dir, exist_ok=True)
-
-    tiff_dir = os.path.join(BASE_DIR, "Dataset")
-
-    def flush_batch(batch_images, batch_rows, out_df, output_csv):
-        if not batch_images:
-            return out_df
-
-        if supports_batch:
-            outputs = infer_model(
-                model,
-                processor,
-                images=batch_images,
-                prompt=[row["prompt"] for row in batch_rows]
-            )
-        else:
-            outputs = [
-                infer_model(
-                    model,
-                    processor,
-                    image=img,
-                    prompt=row["prompt"]
-                )
-                for img, row in zip(batch_images, batch_rows)
-            ]
-
-        for row_dict, out in zip(batch_rows, outputs):
-            row_dict["output"] = out
-
-        out_df = pd.concat([out_df, pd.DataFrame(batch_rows)], ignore_index=True)
-        out_df.to_csv(output_csv, index=False)
-
-        batch_images.clear()
-        batch_rows.clear()
-        return out_df
-
-    csv_files = sorted(f for f in os.listdir(input_dir) if f.endswith(".csv"))
-
-    for csv_file in csv_files:
-        input_csv_path = os.path.join(input_dir, csv_file)
-        df = pd.read_csv(input_csv_path)
-
-        output_csv = os.path.join(
-            output_dir,
-            f"{os.path.splitext(csv_file)[0]}-{model_name}.csv"
-        )
-
-        if os.path.exists(output_csv):
-            out_df = pd.read_csv(output_csv)
-            done = set(
-                zip(
-                    out_df["tiff_file"],
-                    out_df["category"]
-                )
-            )
-        else:
-            out_df = pd.DataFrame()
-            done = set()
-
-        batch_images, batch_rows = [], []
-
-        for _, row in tqdm(df.iterrows(), total=len(df), desc=f"T8-{csv_file}"):
-            tiff_file = row["tiff_file"]
-            tiff_path = os.path.join(tiff_dir, f"{tiff_file}.tiff")
-
-            category = row["category"]
-            gt = row["ground_truth"]
-
-            key = (tiff_file, category)
-            if key in done:
-                continue
-
-            prompt = f"Given the thermal image, return the normalized bounding box of the {category}. Format: x1,y1,x2,y2 where all values are between 0 and 1. Strictly return four comma-separated numbers only."
-
-            
-            img = thermal_with_cbar(tiff_path, direction="right")
-
-            batch_images.append(img)
-            batch_rows.append({
-                "tiff_file": tiff_file,
-                "category": category,
                 "prompt": prompt,
                 "ground_truth": gt
             })

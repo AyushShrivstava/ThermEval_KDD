@@ -10,18 +10,22 @@ import math
 import functools
 import traceback
 DEVICE = 'cuda'
+
 # ==========================================================================
 # Minimize Determinism
+# ==========================================================================
 max_new_tokens=1024
 do_sample = False
 
 # ==========================================================================
 ### Sanity Check ###
+# ==========================================================================
 def check():
     print("The model inference is correctly imported.")
 
 # ==========================================================================
 ### Other Functions ###
+# ==========================================================================
 def catch_exceptions(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
@@ -256,6 +260,7 @@ def build_messages_jinaai(images, prompt):
 
 # ==========================================================================
 ### Loading Qwen-VL-2-7B ###
+# ==========================================================================
 def load_qwen_vl_2_7B(model_name="Qwen/Qwen2-VL-7B-Instruct"):
     model = Qwen2VLForConditionalGeneration.from_pretrained(
         model_name, dtype=torch.bfloat16, device_map="auto"
@@ -292,6 +297,7 @@ def infer_qwen_vl_2_7B(model, processor, images, prompt):
 
 # ==========================================================================
 ### Loading Qwen-VL-2.5-7B ###
+# ==========================================================================
 def load_qwen_vl_2_5_7B(model_name="Qwen/Qwen2.5-VL-7B-Instruct"):
     model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
         model_name, dtype=torch.bfloat16, device_map="auto"
@@ -328,6 +334,7 @@ def infer_qwen_vl_2_5_7B(model, processor, images, prompt):
 
 # ==========================================================================
 ### Loading Qwen-VL-2.5-32B ###
+# ==========================================================================
 def load_qwen_vl_2_5_32B(model_name="Qwen/Qwen2.5-VL-32B-Instruct"):
     model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
         model_name, dtype=torch.bfloat16, device_map="auto"
@@ -364,6 +371,7 @@ def infer_qwen_vl_2_5_32B(model, processor, images, prompt):
 
 # ==========================================================================
 ### Loading Paligemma2-3B###
+# ==========================================================================
 def load_paligemma_2_3B(model_name='google/paligemma2-3b-mix-448'):
     model = PaliGemmaForConditionalGeneration.from_pretrained(model_name, dtype=torch.bfloat16, device_map="auto").eval()
     processor = PaliGemmaProcessor.from_pretrained(model_name)
@@ -384,6 +392,7 @@ def infer_paligemma_2_3B(model, processor, image, prompt):
     
 # ==========================================================================
 ### Loading InternVL3-8B###  
+# ==========================================================================
 def load_internvl3_8B(model_name="OpenGVLab/InternVL3-8B"):
     model = AutoModel.from_pretrained(
         model_name,
@@ -411,6 +420,7 @@ def infer_internvl3_8B(model, tokenizer, images, prompt):
     return responses
 # ==========================================================================
 ### Loading InternVL3-14B###  
+# ==========================================================================
 def load_internvl3_14B(model_name="OpenGVLab/InternVL3-14B"):
     model = AutoModel.from_pretrained(
         model_name,
@@ -438,6 +448,7 @@ def infer_internvl3_14B(model, tokenizer, images, prompt):
 
 # ==========================================================================
 ### Loading InternVL3-38B###  
+# ==========================================================================
 device_map=split_model("OpenGVLab/InternVL3-38B")
 def load_internvl3_38B(model_name="OpenGVLab/InternVL3-38B"):
     model = AutoModel.from_pretrained(
@@ -467,6 +478,7 @@ def infer_internvl3_38B(model, tokenizer, images, prompt):
 
 # ==========================================================================
 ### Loading Blip2-opt-6.7B###  
+# ==========================================================================
 def load_blip2_opt_6_7B(model_name="Salesforce/blip2-opt-6.7b"):
     processor = Blip2Processor.from_pretrained(model_name)
     model = Blip2ForConditionalGeneration.from_pretrained(
@@ -483,8 +495,8 @@ def infer_blip2_opt_6_7B(model, processor, image, prompt):
 
 # ==========================================================================
 ### Loading Phi-3-vision-128k-instruct ###  
-
 ### Use transformers==4.40.0
+# ==========================================================================
 def load_phi_3_vision_128k_instruct(model_name = "microsoft/Phi-3-vision-128k-instruct"):
 
     model = AutoModelForCausalLM.from_pretrained(model_name, device_map="cuda", trust_remote_code=True, torch_dtype=torch.bfloat16, _attn_implementation='eager')
@@ -515,6 +527,7 @@ def infer_phi_3_vision_128k_instruct(model, processor, image, prompt):
     return response
 # ==========================================================================
 ### Loading Idefics3-8B-Llama3### 
+# ==========================================================================
 def load_idefics3_8B(model_name="HuggingFaceM4/Idefics3-8B-Llama3"):
     processor = AutoProcessor.from_pretrained(model_name)
     model = AutoModelForVision2Seq.from_pretrained(
@@ -536,6 +549,7 @@ def infer_idefics3_8B(model, processor, images, prompt):
 
 # ==========================================================================
 ###Loading Llava-1.5-7b-hf ### 
+# ==========================================================================
 def load_llava_1_5_7b(model_name="llava-hf/llava-1.5-7b-hf"):
     model = LlavaForConditionalGeneration.from_pretrained(
         model_name, 
@@ -569,6 +583,7 @@ def infer_llava_1_5_7b(model, processor, image, prompt):
     return response
 # ==========================================================================
 ###Loadding Llama-3.2-11B-Vision-Instruct### 
+# ==========================================================================
 def load_llama_3_2_11_b(model_name="meta-llama/Llama-3.2-11B-Vision-Instruct"):
     model = MllamaForConditionalGeneration.from_pretrained(
         model_name,
@@ -598,6 +613,7 @@ def infer_llama_3_2_11_b(model, processor, image, prompt):
 
 # ==========================================================================
 ### Loading MiniCPM-V-2_6### 
+# ==========================================================================
 def load_minicpm_2_6(model_name="openbmb/MiniCPM-V-2_6"):
     model = AutoModel.from_pretrained(model_name, trust_remote_code=True,
         attn_implementation='eager', dtype=torch.bfloat16)
@@ -619,8 +635,8 @@ def infer_minicpm_2_6(model, tokenizer, image, prompt):
     return res
 # ==========================================================================
 ###Loading microsoft/Phi-3.5-vision-instruct ### 
-
 ### Use `transformers==4.40.0`
+# ==========================================================================
 def load_phi_3_5(model_name="microsoft/Phi-3.5-vision-instruct"):
     model = AutoModelForCausalLM.from_pretrained(
     model_name, 
@@ -669,7 +685,8 @@ def infer_phi_3_5(model, processor, image, prompt):
     return response
 
 # ==========================================================================
-### ### 
+###Loading SMOL 256M### 
+# ==========================================================================
 def load_smol_256m(model_name="HuggingFaceTB/SmolVLM-256M-Instruct"):
     processor = AutoProcessor.from_pretrained(model_name)
     model = AutoModelForVision2Seq.from_pretrained(
@@ -705,6 +722,7 @@ def infer_smol_256m(model, processor, image, prompt):
     return generated_texts[0].split('Assistant:')[1]
 # ==========================================================================
 ### Loading Jinaai### 
+# ==========================================================================
 def load_jinaai(model_name='jinaai/jina-vlm'):
     processor = AutoProcessor.from_pretrained(
         model_name, use_fast=False, trust_remote_code=True
@@ -741,76 +759,3 @@ def infer_jinaai(model, processor, images, prompt):
         responses.append(response)
 
     return responses
-# ==========================================================================
-### ### 
-
-# ==========================================================================
-### ### 
-
-# ==========================================================================
-### ### 
-
-# ==========================================================================
-### ### 
-
-# ==========================================================================
-### Loading Judge### 
-def load_judge(model_name="microsoft/Phi-3.5-mini-instruct"):
-    model = AutoModelForCausalLM.from_pretrained(
-        model_name, 
-        device_map="cuda", 
-        torch_dtype=torch.bfloat16, 
-        trust_remote_code=True, 
-    )
-    tokenizer = AutoTokenizer.from_pretrained("microsoft/Phi-3.5-mini-instruct")
-
-    return model, tokenizer
-
-def infer_judge(model, tokenizer, prompt, output):
-    #Put your prompt here
-    messages = [
-        {"role": "system", "content": "You are a strict post-processing function. You must return ONLY a single numeric value. If no numeric value can be confidently extracted, return EXACTLY: NaN."},
-        {"role": "user", "content": f"""
-         Original prompt: {prompt}
-         Model output: {output}
-         Task:
-         - If the output contains a single numeric value, return it.
-         - If it contains multiple numbers, return the most relevant one.
-         - If no number is present, return NaN.
-         - Do NOT include words, LaTeX, symbols, boxes, formatting, or punctuation.
-         Return only the value. No text. No explanation.
-        """},
-    ]
-
-    pipe = pipeline(
-        "text-generation",
-        model=model,
-        tokenizer=tokenizer,
-    )
-
-    generation_args = {
-        "max_new_tokens": 10,
-        "return_full_text": False,
-        "temperature": 0.0,
-        "do_sample": do_sample,
-    }
-
-    output = pipe(messages, **generation_args)
-    return output[0]['generated_text']
-
-def apply_judge_to_df(df, model, tokenizer):
-    judged_values = []
-
-    for _, row in df.iterrows():
-        val = infer_judge(
-            model,
-            tokenizer,
-            row["prompt"],
-            row["output"]
-        )
-        judged_values.append(val)
-
-    df_new = df.copy()
-    df_new["judge"] = judged_values
-    return df_new
-# ==========================================================================
