@@ -50,6 +50,6 @@ The **ChartInstruct-LLaMA2** model was also sourced from Hugging Face:
 
 For **TinyChart**, we relied on the official implementation from the TinyChart GitHub repository:
 
-[mPLUG/TinyChart-3B-768 (GitHub)](https://github.com/mPLUG-ai/TinyChart-3B-768)
+[mPLUG/TinyChart-3B-768 (GitHub)](https://github.com/X-PLUG/mPLUG-DocOwl/tree/main/TinyChart)
 
 ---
