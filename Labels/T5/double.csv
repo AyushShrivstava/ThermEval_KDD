@@ -57,9 +57,6 @@ Thermal_64,"Given the thermal image with colourbar, determine whether the chest 
 Thermal_63,"Given the thermal image with colourbar, determine whether the forehead of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Forehead,left
 Thermal_63,"Given the thermal image with colourbar, determine whether the nose of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Nose,right
 Thermal_63,"Given the thermal image with colourbar, determine whether the chest of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Chest,right
-Thermal_46,"Given the thermal image with colourbar, determine whether the forehead of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Forehead,right
-Thermal_46,"Given the thermal image with colourbar, determine whether the nose of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Nose,right
-Thermal_46,"Given the thermal image with colourbar, determine whether the chest of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Chest,right
 Thermal_174,"Given the thermal image with colourbar, determine whether the forehead of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Forehead,right
 Thermal_174,"Given the thermal image with colourbar, determine whether the chest of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Chest,left
 Thermal_41,"Given the thermal image with colourbar, determine whether the chest of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Chest,left
@@ -126,9 +123,6 @@ Thermal_228,"Given the thermal image with colourbar, determine whether the chest
 Thermal_23,"Given the thermal image with colourbar, determine whether the forehead of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Forehead,right
 Thermal_23,"Given the thermal image with colourbar, determine whether the nose of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Nose,right
 Thermal_23,"Given the thermal image with colourbar, determine whether the chest of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Chest,left
-Thermal_47,"Given the thermal image with colourbar, determine whether the forehead of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Forehead,right
-Thermal_47,"Given the thermal image with colourbar, determine whether the nose of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Nose,right
-Thermal_47,"Given the thermal image with colourbar, determine whether the chest of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Chest,right
 Thermal_24,"Given the thermal image with colourbar, determine whether the forehead of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Forehead,left
 Thermal_24,"Given the thermal image with colourbar, determine whether the nose of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Nose,right
 Thermal_24,"Given the thermal image with colourbar, determine whether the chest of the left person or the right person is hotter. Respond with only 'left' or 'right'. Strictly answer in one single word.",Chest,left
@@ -1762,8 +1756,6 @@ Thermal_457,"Which of the two chairs has a higher mean temperature, the one on t
 Thermal_457,"Between the chair on the right and the chair on the left, which one is colder? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,left
 Thermal_458,"Between the chair on the right and the chair on the left, which one is warmer? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,right
 Thermal_458,"Between the chair on the right and the chair on the left, which one is colder? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,left
-Thermal_46,"Between the person on the left and the person on the right, which one is warmer? Respond with only 'left' or 'right'. Strictly answer in one single word.",Person,right
-Thermal_46,"Which person is colder, the one on the left or the right? Respond with only 'left' or 'right'. Strictly answer in one single word.",Person,left
 Thermal_460,"Which of the two chairs has a higher mean temperature, the one on the left or the right? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,right
 Thermal_460,"Between the chair on the left and the chair on the right, which one is colder? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,left
 Thermal_461,"Which of the two chairs has a higher mean temperature, the one on the right or the left? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,right
@@ -1778,8 +1770,6 @@ Thermal_468,"Between the chair on the right and the chair on the left, which one
 Thermal_468,"Between the chair on the right and the chair on the left, which one is colder? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,left
 Thermal_469,"Which chair is warmer, the one on the right or the left? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,right
 Thermal_469,"Between the chair on the right and the chair on the left, which one is colder? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,left
-Thermal_47,"Which of the two persons has a higher mean temperature, the one on the right or the left? Respond with only 'left' or 'right'. Strictly answer in one single word.",Person,right
-Thermal_47,"Which of the two persons has a lower mean temperature, the one on the right or the left? Respond with only 'left' or 'right'. Strictly answer in one single word.",Person,left
 Thermal_470,"Which of the two chairs has a higher mean temperature, the one on the right or the left? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,right
 Thermal_470,"Which of the two chairs has a lower mean temperature, the one on the right or the left? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,left
 Thermal_472,"Which of the two chairs has a higher mean temperature, the one on the right or the left? Respond with only 'left' or 'right'. Strictly answer in one single word.",Chair,right

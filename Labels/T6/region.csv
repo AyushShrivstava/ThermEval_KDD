@@ -115,12 +115,6 @@ Thermal_63,"Given the thermal image, what is the temperature estimate of the for
 Thermal_63,"Given the thermal image, what is the temperature estimate of the forehead of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",31.0
 Thermal_63,"Given the thermal image, what is the temperature estimate of the nose of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",31.4
 Thermal_63,"Given the thermal image, what is the temperature estimate of the nose of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",32.4
-Thermal_46,"Given the thermal image, what is the temperature estimate of the chest of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",31.5
-Thermal_46,"Given the thermal image, what is the temperature estimate of the chest of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",31.9
-Thermal_46,"Given the thermal image, what is the temperature estimate of the nose of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",33.9
-Thermal_46,"Given the thermal image, what is the temperature estimate of the nose of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",35.4
-Thermal_46,"Given the thermal image, what is the temperature estimate of the forehead of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",33.4
-Thermal_46,"Given the thermal image, what is the temperature estimate of the forehead of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",33.5
 Thermal_174,"Given the thermal image, what is the temperature estimate of the chest of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",32.8
 Thermal_174,"Given the thermal image, what is the temperature estimate of the chest of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",32.5
 Thermal_174,"Given the thermal image, what is the temperature estimate of the forehead of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",33.1
@@ -253,12 +247,6 @@ Thermal_23,"Given the thermal image, what is the temperature estimate of the nos
 Thermal_23,"Given the thermal image, what is the temperature estimate of the nose of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",33.9
 Thermal_23,"Given the thermal image, what is the temperature estimate of the forehead of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",31.2
 Thermal_23,"Given the thermal image, what is the temperature estimate of the forehead of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",32.7
-Thermal_47,"Given the thermal image, what is the temperature estimate of the chest of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",29.6
-Thermal_47,"Given the thermal image, what is the temperature estimate of the chest of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",30.2
-Thermal_47,"Given the thermal image, what is the temperature estimate of the nose of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",33.9
-Thermal_47,"Given the thermal image, what is the temperature estimate of the nose of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",34.1
-Thermal_47,"Given the thermal image, what is the temperature estimate of the forehead of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",32.2
-Thermal_47,"Given the thermal image, what is the temperature estimate of the forehead of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",33.7
 Thermal_24,"Given the thermal image, what is the temperature estimate of the chest of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",33.4
 Thermal_24,"Given the thermal image, what is the temperature estimate of the chest of the right person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",32.9
 Thermal_24,"Given the thermal image, what is the temperature estimate of the nose of the left person according to the image? The temperature scale is in degrees Celsius. Strictly return a single numerical value rounded to one decimal place.",34.0
@@ -9250,15 +9238,6 @@ Thermal_459,What is the highest temperature recorded for the person? Strictly re
 Thermal_459,What is the average temperature of the shoe? Strictly return a single numerical value rounded to one decimal place.,31.0
 Thermal_459,What is the lowest temperature recorded for the shoe? Strictly return a single numerical value rounded to one decimal place.,30.0
 Thermal_459,What is the hottest point of the shoe? Strictly return a single numerical value rounded to one decimal place.,32.0
-Thermal_46,What is the mean temperature of the bicycle? Strictly return a single numerical value rounded to one decimal place.,30.8
-Thermal_46,What is the coldest point of the bicycle? Strictly return a single numerical value rounded to one decimal place.,29.9
-Thermal_46,What is the maximum temperature of the bicycle? Strictly return a single numerical value rounded to one decimal place.,31.7
-Thermal_46,What is the mean temperature of the person on the left? Strictly return a single numerical value rounded to one decimal place.,32.2
-Thermal_46,What is the coldest point of the person on the left? Strictly return a single numerical value rounded to one decimal place.,29.2
-Thermal_46,What is the hottest point of the person on the left? Strictly return a single numerical value rounded to one decimal place.,36.0
-Thermal_46,What is the average temperature of the person on the right? Strictly return a single numerical value rounded to one decimal place.,32.8
-Thermal_46,What is the minimum temperature of the person on the right? Strictly return a single numerical value rounded to one decimal place.,28.8
-Thermal_46,What is the maximum temperature of the person on the right? Strictly return a single numerical value rounded to one decimal place.,36.5
 Thermal_460,What is the mean temperature of the chair on the left? Strictly return a single numerical value rounded to one decimal place.,28.7
 Thermal_460,What is the lowest temperature recorded for the chair on the left? Strictly return a single numerical value rounded to one decimal place.,27.6
 Thermal_460,What is the hottest point of the chair on the left? Strictly return a single numerical value rounded to one decimal place.,29.4
@@ -9343,12 +9322,6 @@ Thermal_469,What is the highest temperature recorded for the chair on the left? 
 Thermal_469,What is the mean temperature of the person? Strictly return a single numerical value rounded to one decimal place.,35.5
 Thermal_469,What is the minimum temperature of the person? Strictly return a single numerical value rounded to one decimal place.,32.6
 Thermal_469,What is the hottest point of the person? Strictly return a single numerical value rounded to one decimal place.,38.1
-Thermal_47,What average temperature does the person on the right show? Strictly return a single numerical value rounded to one decimal place.,31.2
-Thermal_47,What is the lowest temperature recorded for the person on the right? Strictly return a single numerical value rounded to one decimal place.,27.5
-Thermal_47,What is the highest temperature recorded for the person on the right? Strictly return a single numerical value rounded to one decimal place.,35.5
-Thermal_47,What is the average temperature of the person on the left? Strictly return a single numerical value rounded to one decimal place.,30.2
-Thermal_47,What is the coldest point of the person on the left? Strictly return a single numerical value rounded to one decimal place.,27.5
-Thermal_47,What is the hottest point of the person on the left? Strictly return a single numerical value rounded to one decimal place.,34.9
 Thermal_470,What average temperature does the chair on the right show? Strictly return a single numerical value rounded to one decimal place.,33.3
 Thermal_470,What is the lowest temperature recorded for the chair on the right? Strictly return a single numerical value rounded to one decimal place.,32.0
 Thermal_470,What is the maximum temperature of the chair on the right? Strictly return a single numerical value rounded to one decimal place.,34.0

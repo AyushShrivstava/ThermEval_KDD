@@ -31,8 +31,6 @@ for model_name in model_names:
 
     evaluation_script.evaluate_T7(model_name=model_name, model=model, processor=processor, batch_size=batch_size)
 
-    evaluation_script.evaluate_T8(model_name=model_name, model=model, processor=processor, batch_size=batch_size)
-
     print(f'Evaluation Complete of {model_name}')
 
     model.to("cpu")
